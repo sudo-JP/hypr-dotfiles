@@ -72,7 +72,8 @@
     },
 
     "clock": {
-        "format": "󰥔 {:%I:%M%p   %A, %b %d}",
+        "format": "󰥔 {:%I:%M %p   %A, %b %d}",
+        "tooltip": false, 
         "on-click": "kitty tty-clock -c -C 5",
     	"height": 26
     },
@@ -140,11 +141,18 @@
 
     "network": {
         "on-click": "kitty nmtui", 
-        "format-wifi": "   {signalStrength}%",
-        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-icons": ["  󰤯 ","  󰤟 ","  󰤢 ","  󰤥 ","  󰤨 "],
+        "format" : "{icon}",
+        "format-wifi" : "{icon}",
+        "format-ethernet" : "󰀂 ",
+        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 3,
+        "nospacing": 1,
         "tooltip-format": "{essid} - {ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected ⚠"
+        "format-disconnected": "  ⚠  "
     },
     "bluetooth": {
         "format": " {status}",
