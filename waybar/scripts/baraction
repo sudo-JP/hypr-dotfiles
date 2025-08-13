@@ -30,6 +30,10 @@ gsettings set org.gnome.desktop.interface icon-theme "Adwaita$SWITCHTO"
 #change the background image and be cool about it ;)
 pkill swaybg
 ln -sf ~/.config/hypr/wallpapers/themes/images$SWITCHTO/link ~/.config/hypr/wallpapers/wallpaper.jpg
+magick ~/.config/hypr/wallpapers/wallpaper.jpg -resize 2300x1294\> -quality 85 ~/.config/rofi/wallpaper.jpg
+cp ~/.config/rofi/wallpaper.jpg ~/.config/wlogout/wallpaper.jpg
+magick ~/.config/wlogout/wallpaper.jpg -blur 0x8 ~/.config/wlogout/wallpaper.jpg
+
 hyprctl dispatch -- exec swaybg -m fill -i ~/.config/hypr/wallpapers/wallpaper.jpg
 
 #update the sddm image

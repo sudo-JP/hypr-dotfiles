@@ -78,6 +78,12 @@ tooltip label{
     border-radius: 18px;
 }
 
+#custom-flag, #custom-weather {
+    color: #faf4ed;
+    background: #286983;
+    font-weight: 600;
+}
+
 #custom-cava {
     color: #9ccfd8;
 }

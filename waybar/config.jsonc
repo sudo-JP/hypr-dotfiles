@@ -10,7 +10,7 @@
     
 
     "custom/launch_wofi": {
-        "format": "",
+        "format": " btw",
         "on-click": "pkill rofi; ~/.config/rofi/launcher.sh",
         "tooltip": false
     },
@@ -94,9 +94,9 @@
             "warning": 30,
             "critical": 20
         },
-        "format": "{icon} {capacity}% ",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format": "{icon} ",
+        "format-charging": " {capacity}% ",
+        "format-plugged": " {capacity}% ",
         "format-alt": "{time} {icon}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
@@ -141,7 +141,7 @@
 
     "network": {
         "on-click": "kitty nmtui", 
-        "format-icons": ["  󰤯 ","  󰤟 ","  󰤢 ","  󰤥 ","  󰤨 "],
+        "format-icons": ["󰤯"," 󰤟"," 󰤢"," 󰤥"," 󰤨"],
         "format" : "{icon}",
         "format-wifi" : "{icon}",
         "format-ethernet" : "󰀂 ",
@@ -151,11 +151,11 @@
         "interval": 3,
         "nospacing": 1,
         "tooltip-format": "{essid} - {ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "  ⚠  "
+        "format-linked": "{ifname} (No IP)", 
+        "format-disconnected": " 󰤠 "
     },
     "bluetooth": {
-        "format": " {status}",
+        "format": "",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",

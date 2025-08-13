@@ -77,6 +77,10 @@ tooltip label{
     border-style: solid;
 }
 
+#custom-flag, #custom-weather {
+    background: #393552;
+}
+
 #network, #temperature, #backlight, #custom-launch_wofi {
     border-radius: 18px 0px 0px 18px;
 }
