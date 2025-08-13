@@ -13,6 +13,7 @@
 
 
 ## Run
+magick ~/.config/rofi/bay.JPG -resize 300x200 ~/.config/rofi/bay.JPG
 rofi \
     -show drun \
     -theme config.rasi
