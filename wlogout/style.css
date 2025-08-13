@@ -2,25 +2,35 @@
 	background-image: none;
     transition: 20ms;
 	outline-style: none;
+	font-family: "JetBrains Mono NFM";
 }
 
 window { 
-    background-color: rgba(12, 12, 12, 0.2);
+    background-color: rgba(17, 17, 17, 0.45);
+    background-image: url("./wallpaper.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
 }
+
+
 
 button { 
     margin: 10px;
     border-radius: 20px;
 
     font-size: 20px;
+    font-weight: 600;
+
 
     color: #FFFFFF;
 
-	background-color: rgba(12, 12, 12, 0.3);
-	background-size: 25%;
+	background-color: rgba(0, 0, 0, 0.5);
+	background-size: 20%;
+    box-shadow: none;
+    text-shadow: none;
+    animation: gradient_f 20s ease-in infinite;
 
-	border-style: solid;
-    border: 3px solid white; 
 
 	background-repeat: no-repeat;
 	background-position: center;
@@ -29,9 +39,10 @@ button {
 }
 
 button:focus, button:active, button:hover {
-    border-style: solid; 
-	border: 3px solid #00b9f9;
-	background-color: rgba(12, 12, 12, 0.4);
+	background-color: rgba(64, 70, 89, 0.5);
+	animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
+    background-size: 25%;
 }
 
 #lock {
