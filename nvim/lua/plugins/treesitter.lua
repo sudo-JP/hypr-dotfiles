@@ -1,14 +1,45 @@
 
 -- Customize Treesitter
 
----@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = {
     ensure_installed = {
+      -- Core
       "lua",
       "vim",
-      -- add more arguments for adding more treesitter parsers
+      "vimdoc",
+      "query",
+
+      -- Web
+      "javascript",
+      "typescript",
+      "tsx",
+      "json",
+      "html",
+      "css",
+
+      -- Scripting / Config
+      "bash",
+      "dockerfile",
+      "cmake",
+      "yaml",
+
+      -- Systems
+      "c",           -- C language
+      "cpp",         -- C++
+
+      -- Java
+      "java",
+
+      -- Databases
+      "sql",
+    },
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
     },
   },
 }

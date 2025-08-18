@@ -39,11 +39,28 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "lua_ls",
+      "tsserver",
+      "cssls",
+      "bashls",
+      "dockerls",
+      "docker_compose_language_service",
+      "cmake",
+      "clangd",
+      "jdtls",
+      "sqlls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      clangd = {
+        cmd = { "clangd", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never" },
+      },
+      jdtls = {
+        -- Java needs extra setup per project (workspace folder, etc.)
+        -- AstroNvim handles most of it if `jdtls` is installed
+      },
     },
     -- customize how language servers are attached
     handlers = {

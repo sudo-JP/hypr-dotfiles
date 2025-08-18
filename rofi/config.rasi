@@ -2,10 +2,10 @@
 @import "style.rasi"
 
 configuration {
-	modi: "window,run,drun";
-	display-drun: " ";
-	display-window: " ";
-	display-run: " ";
+	modi: "drun,emoji,window";
+	display-drun: " ";
+	display-window: " ";
+	display-emoji: "😀";
 	drun-display-format: "{icon} {name}";
 	font: "JetBrainsMono Nerd Font 13";
 	show-icons: true;

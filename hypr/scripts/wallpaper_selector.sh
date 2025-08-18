@@ -28,8 +28,7 @@ ln -sf $SELECTED_PATH $WALLPAPER_DIR/link
 # === SET WALLPAPER ===
 ln -sf $WALLPAPER_DIR/link $SYMLINK_PATH
 
-pkill swaybg
-hyprctl dispatch -- exec swaybg -m fill -i "$SYMLINK_PATH"
+swww img "$SYMLINK_PATH" --transition-type any --transition-duration 3
 magick "$SYMLINK_PATH" -resize 2300x1294\> -quality 85 "$HOME/.config/rofi/wallpaper.jpg"
 cp "$HOME/.config/rofi/wallpaper.jpg" "$HOME/.config/wlogout/wallpaper.jpg"
 magick "$HOME/.config/wlogout/wallpaper.jpg" -blur 0x8 ~/.config/wlogout/wallpaper.jpg

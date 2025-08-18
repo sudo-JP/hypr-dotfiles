@@ -97,7 +97,7 @@
         "format": "{icon} ",
         "format-charging": " {capacity}% ",
         "format-plugged": " {capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format-alt": "{icon} {capacity}% ",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
@@ -136,12 +136,12 @@
         "format": "  {temperatureC}°C",
         "critical-threshold": 70,
         "format-critical": " {temperatureC}°C",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+        "on-click": "kitty btop"
     }, 
 
     "network": {
         "on-click": "kitty nmtui", 
-        "format-icons": ["󰤯"," 󰤟"," 󰤢"," 󰤥"," 󰤨"],
+        "format-icons": [" 󰤯"," 󰤟"," 󰤢"," 󰤥"," 󰤨"],
         "format" : "{icon}",
         "format-wifi" : "{icon}",
         "format-ethernet" : "󰀂 ",
