@@ -2,7 +2,7 @@
 @import "style.rasi"
 
 configuration {
-	modi: "drun,emoji,window";
+	modi: "drun,emoji, :~/.config/rofi/wallpapers.sh";
 	display-drun: " ";
 	display-window: " ";
 	display-emoji: "😀";
