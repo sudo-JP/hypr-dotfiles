@@ -6,9 +6,17 @@ To use the weather app, please generate your own AccuWeather API key and put it 
 
 ## Preview 
 
-![](./preview/preview.png)
-![](./preview/preview-terminal.png)
+### Light Mode 
+![](./preview/preview1.png)
+![](./preview/preview2.png)
+![](./preview/preview3.png)
+![](./preview/preview4.png)
+![](./preview/preview5.png)
 
-![](./preview/preview-dark.png)
-![](./preview/preview-terminal-dark.png)
+### Dark Mode 
+![](./preview/preview-dark1.png)
+![](./preview/preview-dark2.png)
+![](./preview/preview-dark3.png)
+![](./preview/preview-dark4.png)
+![](./preview/preview-dark5.png)
 
