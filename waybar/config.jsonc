@@ -16,7 +16,7 @@
     },
 
     "custom/light_dark": {
-        "format": "󰐾 ",
+        "format": "󱏿 ",
         "on-click": "~/.config/waybar/scripts/baraction light",
         "tooltip": false
     },
@@ -46,21 +46,8 @@
       "urgent": "",
       "active": "",
       "default": ""
-    },
-    "persistent-workspaces": {
-      "*": 0
     }
   },
-
-    
-    "custom/power_profile": {
-        //shows the current power profile and switches to next on click
-        "exec": "asusctl profile -p | sed s:'Active profile is'::",
-        "interval": 30,
-        "format": "󰈐{}", 
-        "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
-        "signal": 8
-    },
 
    "custom/weather": {
         //shows the current weather and forecast
@@ -73,7 +60,16 @@
 
     "clock": {
         "format": "󰥔 {:%I:%M %p   %A, %b %d}",
-        "tooltip": false, 
+        "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<span color='#908caa'><b>{}</b></span>",
+                "weekdays": "<span color='#908caa'><b>{}</b></span>",
+                "days": "<span color='#575279'><b>{}</b></span>",
+                "today": "<span color='#f6c177'><b>{}</b></span>"
+            }
+        }, 
         "on-click": "kitty tty-clock -c -C 5",
     	"height": 26
     },

@@ -2,7 +2,7 @@
 @import "style.rasi"
 
 configuration {
-	modi: "drun,emoji, :~/.config/rofi/wallpapers.sh";
+	modi: "drun,emoji, :~/.config/rofi/wallpapers.sh";
 	display-drun: " ";
 	display-window: " ";
 	display-emoji: "😀";
@@ -69,8 +69,8 @@ inputbar {
     spacing:                     10px;
     padding:                     15px;
     border-radius:               10px;
-    background-color:		 @on-primary;
-    text-color:			 @on-surface;
+    background-color:		     @on-primary;
+    text-color:			         @search;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
 textbox-prompt-colon {
@@ -78,7 +78,7 @@ textbox-prompt-colon {
     expand:                      false;
     str:                         "  ";
     background-color:            inherit;
-    text-color:                  inherit;
+    text-color:                  @search;
 }
 entry {
     enabled:                     true;
@@ -86,7 +86,7 @@ entry {
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search";
-    placeholder-color:           inherit;
+    placeholder-color:           @search;
 }
 
 mode-switcher{

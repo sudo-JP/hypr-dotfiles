@@ -44,4 +44,5 @@
     surface-container: #2e2b3c;
     surface-container-high: #393648;
     surface-container-highest: #44415a;
+    search: #dfdad9;
 }
