@@ -6,7 +6,7 @@
     "height": 50,
     "modules-left": ["custom/launch_wofi","hyprland/workspaces","custom/cava","custom/flag", "custom/weather"],
     "modules-center": ["clock"],
-    "modules-right": ["network", "bluetooth", "custom/power_profile","battery","backlight","pulseaudio","pulseaudio#microphone","temperature","custom/light_dark"],
+    "modules-right": ["network", "bluetooth", "custom/power_profile","battery","backlight","pulseaudio","pulseaudio#microphone","temperature", "custom/bongocat","custom/light_dark"],
     
 
     "custom/launch_wofi": {
@@ -164,6 +164,11 @@
         "tooltip": true, 
         "exec" : "~/.config/waybar/scripts/flag.py", 
         "return-type" : "json",
+        "format": "{}"
+    },
+
+    "custom/bongocat": {
+        "exec": "echo -e \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0",   
         "format": "{}"
     }
 }

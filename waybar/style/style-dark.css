@@ -53,6 +53,7 @@ tooltip label{
 }
 
 #custom-launch_wofi,
+#custom-bongocat,
 #custom-light_dark,
 #custom-power_profile,
 #custom-weather,
@@ -74,6 +75,12 @@ tooltip label{
     border: 0;
     border-color: #907aa9;
     border-style: solid;
+}
+
+#custom-bongocat {
+    margin: 3px 0px;
+    margin-top: 10px;
+    padding: 0;
 }
 
 #custom-flag, #custom-weather {

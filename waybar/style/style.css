@@ -50,6 +50,7 @@ tooltip label{
 }
 
 #custom-launch_wofi,
+#custom-bongocat,
 #custom-light_dark,
 #custom-power_profile,
 #custom-weather,
@@ -75,6 +76,12 @@ tooltip label{
 #clock {
     color: #286983;
     border-radius: 18px;
+}
+
+#custom-bongocat {
+    margin: 3px 0px;
+    margin-top: 10px;
+    padding: 0;
 }
 
 #custom-flag, #custom-weather {
