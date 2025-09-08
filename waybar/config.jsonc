@@ -77,11 +77,10 @@
 
     "backlight": {
         "device": "amdgpu_bl1",
-        "format": "{icon} {percent}%",
+        "format": " {icon}",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
-        "min-length": 6
     },
 
     "battery": {
@@ -98,8 +97,8 @@
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "",
+        "format": " {icon}",
+        "format-muted": " ",
         "on-click": "pamixer -t",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer -i 5",
@@ -120,7 +119,7 @@
         "format": "{format_source}",
         "format-source": "  ",
         "format-source-muted": " ",
-        "on-click": "~/.config/hypr/mute_mic_script.sh",
+        "on-click": "~/.config/hypr/scripts/mute_mic_script.sh",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",

@@ -2,9 +2,10 @@
 @import "style.rasi"
 
 configuration {
-	modi: "drun,emoji, :~/.config/rofi/wallpapers.sh";
+	modi: "drun,emoji,nerdy, :~/.config/rofi/wallpapers.sh";
 	display-drun: " ";
 	display-window: " ";
+	display-nerdy: "󰘧";
 	display-emoji: "😀";
 	drun-display-format: "{icon} {name}";
 	font: "JetBrainsMono Nerd Font 13";

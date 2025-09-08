@@ -18,6 +18,10 @@ tooltip {
     border-color: #11111b;
 }
 
+tooltip * {
+    background: transparent;
+}
+
 tooltip label{
     color: #2b2b2c;
 }
