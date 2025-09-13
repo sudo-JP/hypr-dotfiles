@@ -7,129 +7,72 @@ from environs import env
 
 data = {}
 
+# Get json 
+f = open('/home/jason/.config/waybar/scripts/emotes.json', 'r')
+emote_map = json.load(f)
+f.close()
+
+
+
 env.read_env()
 WEATHER_KEY = env("WEATHER_KEY")
 
-def format_time(time):
-    return time.replace("00", "").zfill(2)
-
-
-def format_chances(hour):
-    chances = {
-        "chanceoffog": "Fog",
-        "chanceoffrost": "Frost",
-        "chanceofovercast": "Overcast",
-        "chanceofrain": "Rain",
-        "chanceofsnow": "Snow",
-        "chanceofsunshine": "Sunshine",
-        "chanceofthunder": "Thunder",
-        "chanceofwindy": "Wind"
-    }
-
-    conditions = []
-    for event in chances.keys():
-        if int(hour[event]) > 0:
-            conditions.append(chances[event]+" "+hour[event]+"%")
-    return ", ".join(conditions)
-
-
-# API Requests 
+# Country and City 
 location = requests.get("http://ipwho.is/").json()
-city_code = requests.get(f'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=%20{WEATHER_KEY}&q={location['city']}').json()
-weather2 = requests.get(f"http://dataservice.accuweather.com/currentconditions/v1/{city_code[0]['Key']}?apikey=%20{WEATHER_KEY}").json()
-weather = requests.get("https://wttr.in/?format=j1").json()
+city_req = requests.get(f'https://ipinfo.io/{location['ip']}/json').json()
+
+city = city_req['city']
+country = location['country_code']
+
+# Lat and long 
+lonlat_req = requests.get(f'http://api.openweathermap.org/geo/1.0/direct?q={city},{country}&limit=1&appid={WEATHER_KEY}').json()[0]
+
+lat = lonlat_req['lat']
+lon = lonlat_req['lon']
+
+# Weather 
+weather_req = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={WEATHER_KEY}&units=metric').json()
+
+curr_temp = weather_req['main']['temp']
+wt_status = weather_req['weather'][0]['main']
+d_or_n = weather_req['weather'][0]['icon'][-1]
+emote = emote_map[wt_status][d_or_n]
+
+data['text'] = f' {curr_temp}° {emote}'
+
+# Tooltip
+# Current weather 
+data['tooltip'] = f' {weather_req['weather'][0]['description'].capitalize()} {curr_temp}° {emote} \n'
+data['tooltip'] += f' Feels like: {weather_req['main']['feels_like']}° \n'
+data['tooltip'] += f' H: {weather_req['main']['temp_max']}° L: {weather_req['main']['temp_min']}° \n'
+
+# Next 5 days predictions 
+pred_req = requests.get(f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={WEATHER_KEY}&units=metric").json()
+
+day = '0'
+for l in pred_req['list']:
+    dt = l['dt_txt']
+    arr = dt.split(' ')
+    if arr[1] != '12:00:00':
+        continue
+
+    days = arr[0].split('-')
+    if days[2] != day:
+        day = days[2]
+
+        # Date 
+        days.reverse()
+        date = "-".join(days)
+        data['tooltip'] += f' \n<b>{date}</b> \n'
 
 
-tempint = int(weather['current_condition'][0]['FeelsLikeC'])
-extrachar = ''
-if tempint > 0 and tempint < 10:
-    extrachar = '+'
+        # 5 days predictions content 
+        temp = l['main']['temp']
+        pred_status = l['weather'][0]['main']
+        pred_d_or_n = l['weather'][0]['icon'][-1]
+        pred_emote = emote_map[pred_status][pred_d_or_n]
+        high = l['main']['temp_max']
+        low = l['main']['temp_min']
 
-
-def day_night(num): 
-    day = {
-        33: "🌞 ",    # Clear
-        34: "🌤️ ",   # Mostly Clear
-        35: "⛅ ",    # Partly Cloudy
-        36: "🌥️ ",   # Intermittent Clouds
-    }
-    night = {
-        33: "🌙 ", 
-        34: "🌙☁️ ", 
-        35: "🌙☁️ ", 
-        36: "🌙☁️ ", 
-    }
-    if weather2[0]['IsDayTime']: 
-        return day[num]
-    else: 
-        return night[num]
-
-
-
-WEATHER_CODES = {
-    1: "☀️ ",    # Sunny
-    2: "🌞 ",    # Mostly Sunny
-    3: "⛅ ",    # Partly Sunny
-    4: "🌥️ ",    # Intermittent Clouds
-    5: "🌤️ ",    # Hazy Sunshine
-    6: "☁️ ",    # Mostly Cloudy
-    7: "☁️ ",    # Cloudy
-    8: "🌫️ ",    # Dreary (Overcast)
-    11: "🌫️ ",   # Fog
-    12: "🌧️ ",   # Showers
-    13: "🌧️ ",   # Mostly Cloudy w/ Showers
-    14: "🌦️ ",   # Partly Sunny w/ Showers
-    15: "🌩️ ",   # T-Storms
-    16: "⛈️ ",   # Mostly Cloudy w/ T-Storms
-    17: "🌩️ ",   # Partly Sunny w/ T-Storms
-    18: "🌧️ ",   # Rain
-    19: "🌨️ ",   # Flurries
-    20: "🌨️ ",   # Mostly Cloudy w/ Flurries
-    21: "🌨️ ",   # Partly Sunny w/ Flurries
-    22: "❄️ ",    # Snow
-    23: "❄️ ",    # Mostly Cloudy w/ Snow
-    24: "🧊 ",    # Ice
-    25: "🌨️ ",   # Sleet
-    26: "❄️ ",    # Freezing Rain
-    29: "🌧️❄️ ", # Rain and Snow
-    30: "🔥 ",    # Hot
-    31: "❄️ ",    # Cold
-    32: "💨 ",   # Windy
-    33: day_night(33),  
-    34: day_night(34), 
-    35: day_night(35), 
-    36: day_night(36), 
-    37: "🌕🌫️ ", # Hazy Moonlight
-    38: "☁️ ",    # Mostly Cloudy
-    39: "🌦️ ",   # Partly Cloudy w/ Showers
-    40: "🌧️ ",   # Mostly Cloudy w/ Showers
-    41: "🌩️ ",   # Partly Cloudy w/ T-Storms
-    42: "⛈️ ",   # Mostly Cloudy w/ T-Storms
-    43: "🌨️ ",   # Mostly Cloudy w/ Flurries
-    44: "❄️ ",    # Mostly Cloudy w/ Snow
-}
-
-data['text'] = ' ' + WEATHER_CODES[weather2[0]['WeatherIcon']] + \
-    " "+extrachar+str(weather2[0]['Temperature']['Metric']['Value'])+"°"
-    
-
-data['tooltip'] = f"<b>{weather2[0]['WeatherText']} {weather2[0]['Temperature']['Metric']['Value']}°</b>\n"
-data['tooltip'] += f"Feels like: {weather['current_condition'][0]['FeelsLikeC']}°\n"
-data['tooltip'] += f"Wind: {weather['current_condition'][0]['windspeedKmph']}Km/h\n"
-data['tooltip'] += f"Humidity: {weather['current_condition'][0]['humidity']}%\n"
-for i, day in enumerate(weather['weather']):
-    data['tooltip'] += f"\n<b>"
-    if i == 0:
-        data['tooltip'] += "Today, "
-    if i == 1:
-        data['tooltip'] += "Tomorrow, "
-    data['tooltip'] += f"{day['date']}</b>\n"
-    data['tooltip'] += f"⬆️ {day['maxtempC']}° ⬇️ {day['mintempC']}° "
-    data['tooltip'] += f"🌅 {day['astronomy'][0]['sunrise']} 🌇 {day['astronomy'][0]['sunset']}\n"
-    for hour in day['hourly']:
-        if i == 0:
-            if int(format_time(hour['time'])) < datetime.now().hour-2:
-                continue
-
-
+        data['tooltip'] += f" {pred_status} {temp}° {pred_emote} H: {high}° L: {low}° \n"
 print(json.dumps(data))
