@@ -33,21 +33,23 @@ lon = lonlat_req['lon']
 # Weather 
 weather_req = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={WEATHER_KEY}&units=metric').json()
 
+
 curr_temp = weather_req['main']['temp']
 wt_status = weather_req['weather'][0]['main']
 d_or_n = weather_req['weather'][0]['icon'][-1]
 emote = emote_map[wt_status][d_or_n]
 
-data['text'] = f' {curr_temp}° {emote}'
+data['text'] = f' {round(curr_temp)}° {emote}'
 
 # Tooltip
 # Current weather 
-data['tooltip'] = f' {weather_req['weather'][0]['description'].capitalize()} {curr_temp}° {emote} \n'
-data['tooltip'] += f' Feels like: {weather_req['main']['feels_like']}° \n'
-data['tooltip'] += f' H: {weather_req['main']['temp_max']}° L: {weather_req['main']['temp_min']}° \n'
+data['tooltip'] = f' {weather_req['weather'][0]['description'].capitalize()} {round(curr_temp)}° {emote} \n'
+data['tooltip'] += f' Feels like: {round(weather_req['main']['feels_like'])}° \n'
+data['tooltip'] += f' H: {round(weather_req['main']['temp_max'])}° L: {round(weather_req['main']['temp_min'])}° \n'
 
 # Next 5 days predictions 
 pred_req = requests.get(f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={WEATHER_KEY}&units=metric").json()
+
 
 day = '0'
 for l in pred_req['list']:
@@ -74,5 +76,9 @@ for l in pred_req['list']:
         high = l['main']['temp_max']
         low = l['main']['temp_min']
 
-        data['tooltip'] += f" {pred_status} {temp}° {pred_emote} H: {high}° L: {low}° \n"
+        data['tooltip'] += f" {pred_status} {round(temp)}° {pred_emote} H: {round(high)}° L: {round(low)}° \n"
+
+with open('/home/jason/.config/hypr/scripts/weather.json', 'w') as wttr_fp: 
+    json.dump(data, wttr_fp)
+
 print(json.dumps(data))
