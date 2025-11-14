@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-curr_time=$(date +%H)  # Run date command and store the result as integer
+temp=$(date +%H)
+curr_time=$((10#$temp))  # Run date command and store the result as integer
 
 if [[ $curr_time -ge 5 && $curr_time -le 10 ]]; then 
   echo "Good Morning"

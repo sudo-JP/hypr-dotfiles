@@ -1,15 +1,27 @@
 return {
-  'luochen1990/rainbow',
+  {
+    'luochen1990/rainbow',
   event = { 'BufReadPre', 'BufNewFile' },
   init = function()
     vim.g.rainbow_active = 1
   end,
   config = function()
     vim.cmd('RainbowToggleOn')
-  end,
+  end 
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
+
+  {
+    formatting = {
+      format_on_save = false,
+    },
+  }
 }
 
---if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE

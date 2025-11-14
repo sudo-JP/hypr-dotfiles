@@ -18,8 +18,15 @@ env.read_env()
 WEATHER_KEY = env("WEATHER_KEY")
 
 # Country and City 
-location = requests.get("http://ipwho.is/").json()
-city_req = requests.get(f'https://ipinfo.io/{location['ip']}/json').json()
+#location = requests.get("http://ipwho.is/").json()
+#city_req = requests.get(f'https://ipinfo.io/{location['ip']}/json').json()
+
+f = open('/home/jason/.config/waybar/scripts/locations.json', 'r')
+locations = json.load(f)
+f.close()
+
+location = locations['ip']
+city_req = locations['place']
 
 city = city_req['city']
 country = location['country_code']
@@ -43,7 +50,8 @@ data['text'] = f' {round(curr_temp)}° {emote}'
 
 # Tooltip
 # Current weather 
-data['tooltip'] = f' {weather_req['weather'][0]['description'].capitalize()} {round(curr_temp)}° {emote} \n'
+data['tooltip'] = '<b>Today\'s weather</b>\n'
+data['tooltip'] += f' {weather_req['weather'][0]['description'].capitalize()} {round(curr_temp)}° {emote} \n'
 data['tooltip'] += f' Feels like: {round(weather_req['main']['feels_like'])}° \n'
 data['tooltip'] += f' H: {round(weather_req['main']['temp_max'])}° L: {round(weather_req['main']['temp_min'])}° \n'
 

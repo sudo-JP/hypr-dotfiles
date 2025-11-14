@@ -7,6 +7,7 @@ o.expandtab = true
 o.shiftwidth = 4
 o.softtabstop = 4
 o.autoindent = true
+o.wrap = true 
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("colorscheme catppuccin")
 vim.cmd("hi Normal guibg=NONE ctermbg=NONE ")

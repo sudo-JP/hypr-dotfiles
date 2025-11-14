@@ -53,7 +53,7 @@
         //shows the current weather and forecast
         "tooltip" : true,
         "format" : "{}",
-        "interval" : 60,
+        "interval" : 30,
         "return-type" : "json",
         "exec" : "~/.config/waybar/scripts/venv/bin/python3 ~/.config/waybar/scripts/waybar-wttr.py"
     },
@@ -78,6 +78,7 @@
     "backlight": {
         "device": "amdgpu_bl1",
         "format": " {icon}",
+        "tooltip": false, 
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
@@ -162,7 +163,7 @@
     "custom/flag": {
         "tooltip": true, 
         "exec" : "~/.config/waybar/scripts/flag.py", 
-        "interval": 60,
+        "interval": 90,
         "return-type" : "json",
         "format": "{}"
     },

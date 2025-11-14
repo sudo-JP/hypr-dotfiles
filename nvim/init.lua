@@ -3,8 +3,6 @@ require "classic_vim"
 require "polish"
 
 
--- In your init.lua or relevant config file:
-
 require("neo-tree").setup({
   filesystem = {
     filtered_items = {
@@ -37,7 +35,32 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    -- Clear all LSP formatting autocmds for the current buffer
+    pcall(function()
+      vim.api.nvim_clear_autocmds({ group = "lsp_auto_format", buffer = 0 })
+    end)
+    -- Cancel any format-on-save action
+    vim.b.disable_autoformat = true
+  end,
+})
 
+-- Intercept AstroLSP's format function and make it do nothing if disabled
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    vim.lsp.buf.format = function()
+      if vim.b.disable_autoformat then
+        return
+      end
+      pcall(vim.lsp.buf.format)
+    end
+  end,
+})
 
-
-
+return {
+  formatting = {
+    format_on_save = false,
+  },
+}
