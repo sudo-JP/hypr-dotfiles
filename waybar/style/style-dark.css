@@ -120,6 +120,10 @@ tooltip label {
     margin-right: 10px;
 }
 
+#custom-light_dark {
+    color: #06b6d4
+}
+
 #temperature.critical {
     color: #e92d4d;
 }

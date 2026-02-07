@@ -3,6 +3,24 @@ require "classic_vim"
 require "polish"
 
 
+-- Disable completion plugin hijack of <Tab> in insert mode
+vim.keymap.set("i", "<Tab>", "<Tab>", { noremap = true, silent = true })
+vim.keymap.set("i", "<S-Tab>", "<S-Tab>", { noremap = true, silent = true })
+
+vim.keymap.del("i", "<Tab>")
+vim.keymap.del("s", "<Tab>")
+vim.keymap.del("i", "<S-Tab>")
+vim.keymap.del("s", "<S-Tab>")
+vim.snippet = nil
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.bo.expandtab = false
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+  end,
+})
 require("neo-tree").setup({
   filesystem = {
     filtered_items = {

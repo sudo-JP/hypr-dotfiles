@@ -102,6 +102,10 @@ tooltip label{
     padding: 0px 15px 0px 15px;
 }
 
+#custom-light_dark {
+    color: #06b6d4
+}
+
 #network, #temperature, #backlight, #custom-launch_wofi {
     border-radius: 18px 0px 0px 18px;
 }
